@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int         @default(autoincrement()) @id
+  email             String      @unique
+  name              String?
+  ratings           Rating[]
+  comments          Comment[]
+  deactivatedDate   DateTime?
+}
+
+model Rating {
+  id            Int       @default(autoincrement()) @id
+  score         Int
+  publishedDate DateTime  @default(now())
+  updatedDate   DateTime? 
+  user          User      @relation(fields: [userId], references: [id])
+  userId        Int
+  book          Book      @relation(fields: [bookId], references: [id])
+  bookId        Int
+}
+
+model Comment {
+  id              Int       @default(autoincrement()) @id
+  content         String
+  user            User      @relation(fields: [userId], references: [id])
+  userId          Int
+  publishedDate   DateTime  @default(now())
+  updatedDate     DateTime?
+  responseTo      Comment?  @relation("CommentDiscussion", fields: [responseToId], references: [id])
+  responseToId    Int?
+  responses       Comment[] @relation("CommentDiscussion")
+  book            Book      @relation(fields: [bookId], references: [id])
+  bookId          Int
+}
+
+model Book {
+  id                Int   @default(autoincrement()) @id
+  primary_isbn13    String
+  publisher         String
+  description       String
+  title             String
+  author            String
+  contributor       String
+  bookImageUrl      String
+  amazonProductUrl  String
+  ageGroup          String
+  bookReviewUrl     String
+  sundayReviewUrl   String
+  ratings           Rating[]
+  comments          Comment[]
+}
