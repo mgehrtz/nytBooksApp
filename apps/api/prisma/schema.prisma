@@ -16,10 +16,11 @@ datasource db {
 model User {
   id                Int         @default(autoincrement()) @id
   email             String      @unique
-  name              String?
+  firstName         String
+  lastName          String
+  deactivatedDate   DateTime?
   ratings           Rating[]
   comments          Comment[]
-  deactivatedDate   DateTime?
 }
 
 model Rating {
