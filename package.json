@@ -7,8 +7,8 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently 'npm:dev:api' 'npm:dev:client'",
-    "dev:api": "cd apps/api && npm run start",
+    "stack": "concurrently 'npm:dev:api' 'npm:dev:client'",
+    "dev:api": "cd apps/api && npm run build && node dist/apps/api/src/main",
     "dev:client": "cd apps/client && npm run dev"
   },
   "devDependencies": {

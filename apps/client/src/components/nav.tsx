@@ -13,8 +13,17 @@ export function Nav() {
 
   return (
     <div className="flex justify-between items-center bg-white px-5 py-3 rounded-2xl">
-      <h2 className="font-bold text-2xl">NYT Best Sellers</h2>
+      <Link href="/">
+        <h2 className="font-bold text-2xl">NYT Best Sellers</h2>
+      </Link>
       <div className="nav-links flex items-center gap-3">
+        <Button 
+          className="font-medium" 
+          href={'/'}
+          as={Link}
+        >
+          Home
+        </Button>
         <Button
           className="font-medium" 
           href={'/my-collection'}

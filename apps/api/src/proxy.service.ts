@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { NytOverview } from './interfaces/NytOverview.interface';
+import { NytOverview } from '@interfaces/NytOverview.interface';
 
 @Injectable()
 export class ProxyService {
