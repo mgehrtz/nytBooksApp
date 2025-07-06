@@ -31,7 +31,7 @@ model Rating {
   user          User      @relation(fields: [userId], references: [id])
   userId        Int
   book          Book      @relation(fields: [bookId], references: [id])
-  bookId        Int
+  bookId        String
 }
 
 model Comment {
@@ -45,12 +45,11 @@ model Comment {
   responseToId    Int?
   responses       Comment[] @relation("CommentDiscussion")
   book            Book      @relation(fields: [bookId], references: [id])
-  bookId          Int
+  bookId          String
 }
 
 model Book {
-  id                Int   @default(autoincrement()) @id
-  primary_isbn13    String
+  id                String  @id @unique
   publisher         String
   description       String
   title             String
@@ -61,6 +60,15 @@ model Book {
   ageGroup          String
   bookReviewUrl     String
   sundayReviewUrl   String
+  onCurrentList     Boolean
+  category          Category  @relation(fields: [categoryId], references: [id])
+  categoryId        Int
   ratings           Rating[]
   comments          Comment[]
+}
+
+model Category {
+  id      Int       @id @unique
+  title   String    @unique
+  books   Book[]
 }
