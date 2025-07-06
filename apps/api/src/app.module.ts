@@ -1,13 +1,13 @@
 import { Module, OnModuleInit } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { DataAccessModule } from './data-access/data-access.module';
 import { ProxyService } from './proxy.service';
 import { HttpModule } from '@nestjs/axios';
 import { BookController } from './controllers/book.controller';
+import { CategoryController } from './controllers/category.controller';
 
 @Module({
   imports: [DataAccessModule, HttpModule],
-  controllers: [AppController, BookController],
+  controllers: [BookController, CategoryController],
   providers: [ProxyService, DataAccessModule],
 })
 export class AppModule implements OnModuleInit {

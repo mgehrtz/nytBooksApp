@@ -32,7 +32,9 @@ export default function RootLayout({
         <Providers>
         <div className="bg-stone-100 p-2 min-h-screen">
           <Nav />
-          {children}
+          <div className=" max-w-7xl mx-auto">
+            {children}
+          </div>
         </div>    
         </Providers>
       </body>

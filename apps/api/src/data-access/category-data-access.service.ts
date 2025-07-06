@@ -6,8 +6,12 @@ import { Category } from '@prisma/client';
 export class CategoryDataAccessService {
   constructor(private readonly prisma: PrismaService) {}
 
+  public async getAll() {
+    return await this.prisma.category.findMany();
+  }
+
   public async createMany(categories: Category[]) {
-    await this.prisma.category.createMany({
+    return await this.prisma.category.createMany({
       data: categories,
       skipDuplicates: true,
     });

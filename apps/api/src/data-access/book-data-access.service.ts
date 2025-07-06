@@ -6,11 +6,24 @@ import { Book } from '@prisma/client';
 export class BookDataAccessService {
   constructor(private readonly prisma: PrismaService) {}
 
-  public async getBookByIsbn(isbn: string): Promise<Book> {
-    return await this.prisma.book.findUniqueOrThrow({
+  public async getBookByIsbn(isbn: string): Promise<Book | null> {
+    return await this.prisma.book.findFirst({
       where: {
         id: isbn,
       },
+    });
+  }
+
+  public async getAllIsbns(): Promise<string[]> {
+    const rows = await this.prisma.book.findMany({
+      select: { id: true },
+    });
+    return rows.map((row) => row.id);
+  }
+
+  public async createMany(books: Book[]) {
+    return await this.prisma.book.createMany({
+      data: books,
     });
   }
 }

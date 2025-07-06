@@ -1,7 +1,9 @@
-import { BookList } from "@/components/book-list";
+import CategoryList from "@/components/category-list";
 
 export default function Home() {
   return (
-    <BookList />
+    <div className="flex max-w-80">
+      <CategoryList />
+    </div>
   );
 }

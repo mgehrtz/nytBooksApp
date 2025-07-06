@@ -59,10 +59,8 @@ model Book {
   amazonProductUrl  String
   ageGroup          String
   bookReviewUrl     String
-  sundayReviewUrl   String
-  onCurrentList     Boolean
-  category          Category  @relation(fields: [categoryId], references: [id])
-  categoryId        Int
+  categories        CategoryBook[]
+  avgRating         Float
   ratings           Rating[]
   comments          Comment[]
 }
@@ -70,5 +68,15 @@ model Book {
 model Category {
   id      Int       @id @unique
   title   String    @unique
-  books   Book[]
+  books   CategoryBook[]
+}
+
+model CategoryBook {
+  category      Category    @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+  book          Book        @relation(fields: [bookId], references: [id])
+  bookId        String
+  rank          Int
+
+  @@id([categoryId, bookId])
 }
