@@ -4,6 +4,7 @@ export interface Comment {
   username: string;
   publishedDate: Date;
   updatedDate?: Date;
+  responseToId: number;
   responses: Comment[];
   bookId: string;
 }

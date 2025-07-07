@@ -4,6 +4,7 @@ import { PrismaService } from './prisma/prisma.service';
 import { BookDataAccessService } from './book-data-access.service';
 import { CategoryDataAccessService } from './category-data-access.service';
 import { CategoryBookDataAccessService } from './category-book-data-access.service';
+import { CommentDataAccessService } from './comment-data-access.service';
 
 @Module({
   providers: [
@@ -12,12 +13,14 @@ import { CategoryBookDataAccessService } from './category-book-data-access.servi
     BookDataAccessService,
     CategoryDataAccessService,
     CategoryBookDataAccessService,
+    CommentDataAccessService,
   ],
   exports: [
     UserDataAccessService,
     BookDataAccessService,
     CategoryDataAccessService,
     CategoryBookDataAccessService,
+    CommentDataAccessService,
   ],
 })
 export class DataAccessModule {}

@@ -1,9 +1,9 @@
+import ReviewForm from "@/components/review-form";
 import StarRating from "@/components/star-rating";
 import { getBookByIsbn } from "@/utils/utils";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Image } from "@heroui/react";
- 
 
 export default async function BookOverview({ params } : { params: Promise<{ isbn: string }> }) {
   const isbn = (await params).isbn;
@@ -31,7 +31,8 @@ export default async function BookOverview({ params } : { params: Promise<{ isbn
         <StarRating currentUserRating={ rating } />
         <h3 className="text-lg font-bold text-slate-500 mt-7">{ book.author }</h3>
         <h1 className="text-6xl font-extrabold text-slate-700">{ book.title }</h1>
-        <p className="mt-3 pr-40">{ book.description }</p>
+        <p className="my-3 pr-40">{ book.description }</p>
+        <ReviewForm bookId={ isbn } />
       </div>
     </div>
   );

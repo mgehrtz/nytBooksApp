@@ -4,10 +4,11 @@ import { ProxyService } from './proxy.service';
 import { HttpModule } from '@nestjs/axios';
 import { BookController } from './controllers/book.controller';
 import { CategoryController } from './controllers/category.controller';
+import { CommentController } from './controllers/comment.controller';
 
 @Module({
   imports: [DataAccessModule, HttpModule],
-  controllers: [BookController, CategoryController],
+  controllers: [BookController, CategoryController, CommentController],
   providers: [ProxyService, DataAccessModule],
 })
 export class AppModule implements OnModuleInit {
