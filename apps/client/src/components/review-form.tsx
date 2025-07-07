@@ -3,9 +3,13 @@
 import { postComment } from "@/utils/utils";
 import { Button, Form, Input, Textarea } from "@heroui/react";
 import { Comment } from "@/types/interfaces/comment.interface";
+import React, { useRef } from "react";
 
-export default function ReviewForm({ bookId }: { bookId: string; }) {
-  async function processComment(e) {
+export default function ReviewForm({ bookId, commentsList, onPostSuccess }: Props) {
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  async function processComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
     const comment = {} as Comment;
@@ -14,29 +18,25 @@ export default function ReviewForm({ bookId }: { bookId: string; }) {
     comment.content = data?.comment as string;
     comment.publishedDate = new Date();
 
-    postComment(comment).then((success: boolean) => {
-      if(success){
-        e.currentTarget.reset();
+    postComment(comment).then((data: { success: boolean; comment: Comment | null}) => {
+      if(data.success){
+        const newCommentList = Array.from(commentsList);
+        if(data.comment != null){
+          newCommentList.push(data.comment);
+        }
+        onPostSuccess(newCommentList);
+        formRef?.current?.reset();
       }
     });
   }
 
   return (
     <Form
-      className="w-full max-w-xs flex flex-col gap-4"
+      className="min-w-fit w-full max-w-xs flex flex-col gap-4"
       onSubmit={processComment}
       id="commentForm"
+      ref={formRef}
     >
-      <Input
-        isRequired
-        errorMessage="Please enter a valid username"
-        label="Username"
-        labelPlacement="outside"
-        name="username"
-        placeholder="Enter your username"
-        type="text"
-      />
-
       <Textarea
         isRequired
         errorMessage="Comment field is empty."
@@ -54,4 +54,10 @@ export default function ReviewForm({ bookId }: { bookId: string; }) {
       <Input type="hidden" name="bookId" value={ bookId } />
     </Form>
   );
+}
+
+interface Props {
+  onPostSuccess: (newCommentList: Comment[]) => void;
+  bookId: string;
+  commentsList: Comment[];
 }

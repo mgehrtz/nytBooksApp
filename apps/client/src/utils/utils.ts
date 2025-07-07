@@ -79,7 +79,7 @@ export function getBookRatingByUser(bookId: string): Promise<Rating> {
   })
 }
 
-export function postComment(comment: Comment): Promise<boolean> {
+export function postComment(comment: Comment): Promise<{ success: boolean, comment: Comment | null }> {
   return new Promise((res, rej) => {
     fetch(
       `${process.env.NEXT_PUBLIC_BASE_API_URL}/comment`,
@@ -92,10 +92,11 @@ export function postComment(comment: Comment): Promise<boolean> {
       }
     ).then(async (resp) => {
       if(resp.ok){
-        res(true);
+        const comment = await resp.json() as Comment;
+        res({ success: true, comment: comment });
       }else{
         console.warn(await resp.json());
-        rej(false);
+        rej({ success: false, comment: null });
       }
     });
   });
