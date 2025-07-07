@@ -32,6 +32,8 @@ model Rating {
   userId        Int
   book          Book      @relation(fields: [bookId], references: [id])
   bookId        String
+
+  @@unique([userId, bookId])
 }
 
 model Comment {

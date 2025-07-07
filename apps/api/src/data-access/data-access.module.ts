@@ -5,6 +5,7 @@ import { BookDataAccessService } from './book-data-access.service';
 import { CategoryDataAccessService } from './category-data-access.service';
 import { CategoryBookDataAccessService } from './category-book-data-access.service';
 import { CommentDataAccessService } from './comment-data-access.service';
+import { RatingDataAccessService } from './rating-data-access.service';
 
 @Module({
   providers: [
@@ -14,6 +15,7 @@ import { CommentDataAccessService } from './comment-data-access.service';
     CategoryDataAccessService,
     CategoryBookDataAccessService,
     CommentDataAccessService,
+    RatingDataAccessService,
   ],
   exports: [
     UserDataAccessService,

@@ -5,10 +5,17 @@ import { HttpModule } from '@nestjs/axios';
 import { BookController } from './controllers/book.controller';
 import { CategoryController } from './controllers/category.controller';
 import { CommentController } from './controllers/comment.controller';
+import { RatingController } from './controllers/rating.controller';
+import { LogicModule } from './logic/logic.module';
 
 @Module({
-  imports: [DataAccessModule, HttpModule],
-  controllers: [BookController, CategoryController, CommentController],
+  imports: [DataAccessModule, HttpModule, LogicModule],
+  controllers: [
+    BookController,
+    CategoryController,
+    CommentController,
+    RatingController,
+  ],
   providers: [ProxyService, DataAccessModule],
 })
 export class AppModule implements OnModuleInit {

@@ -6,10 +6,14 @@ import { Book } from '@prisma/client';
 export class BookDataAccessService {
   constructor(private readonly prisma: PrismaService) {}
 
-  public async getBookByIsbn(isbn: string): Promise<Book | null> {
+  public async getBookByIsbn(isbn: string) {
     return await this.prisma.book.findFirst({
       where: {
         id: isbn,
+      },
+      include: {
+        ratings: true,
+        comments: true,
       },
     });
   }
@@ -24,6 +28,17 @@ export class BookDataAccessService {
   public async createMany(books: Book[]) {
     return await this.prisma.book.createMany({
       data: books,
+    });
+  }
+
+  public async updateScore(bookId: string, avgScore: number) {
+    return await this.prisma.book.update({
+      where: {
+        id: bookId,
+      },
+      data:  {
+        avgRating: avgScore,
+      },
     });
   }
 }
