@@ -9,7 +9,10 @@
   "scripts": {
     "stack": "concurrently 'npm:dev:api' 'npm:dev:client'",
     "dev:api": "cd apps/api && npm run build && nest start -w",
-    "dev:client": "cd apps/client && npm run dev"
+    "dev:client": "cd apps/client && npm run dev",
+    "setup": "npm install && npm run npm:install:api && npm run npm:install:client",
+    "npm:install:api": "cd apps/api && npm install",
+    "npm:install:client": "cd apps/client && npm install"
   },
   "devDependencies": {
     "concurrently": "^9.2.0"
