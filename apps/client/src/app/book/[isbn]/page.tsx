@@ -13,17 +13,19 @@ export default async function BookOverview({ params } : { params: Promise<{ isbn
   return (
     <div className="flex mx-auto mt-12">
       <div className="flex flex-col w-35% max-w-xl">
-        <Image 
-          isBlurred
-          src={ book.bookImageUrl }
-          height='70vh'
-          alt={`Image of the cover of ${book.title}.`}
-        />
-        <div className="mt-5">
-          <p className="text-xs text-center italic font-bold text-slate-400">Average Rating</p>
-          <div className="flex justify-center items-center">
-            <FontAwesomeIcon icon={faStar} height='20' fill="gold" stroke="gold"/>
-            <span className="text-lg font-bold ml-2">{ book.avgRating }</span>
+        <div className="sticky top-3">
+          <Image
+            isBlurred
+            src={ book.bookImageUrl }
+            height='70vh'
+            alt={`Image of the cover of ${book.title}.`}
+          />
+          <div className="mt-5">
+            <p className="text-xs text-center italic font-bold text-slate-400">Average Rating</p>
+            <div className="flex justify-center items-center">
+              <FontAwesomeIcon icon={faStar} height='20' fill="gold" stroke="gold"/>
+              <span className="text-lg font-bold ml-2">{ book.avgRating }</span>
+            </div>
           </div>
         </div>
       </div>
@@ -31,7 +33,7 @@ export default async function BookOverview({ params } : { params: Promise<{ isbn
         <StarRating currentBookId={ isbn } currentUserRating={ userRating.score } />
         <h3 className="text-lg font-bold text-slate-500 mt-7">{ book.author }</h3>
         <h1 className="text-6xl font-extrabold text-slate-700">{ book.title }</h1>
-        <p className="my-3 pr-40">{ book.description }</p>
+        <p className="mt-5 mb-7 pr-40">{ book.description }</p>
         <ReviewSection bookId={isbn} comments={book.comments} />
       </div>
     </div>

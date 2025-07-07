@@ -15,6 +15,14 @@ export class CommentDataAccessService {
 
     return await this.prisma.comment.create({
       data: newComment,
+      include: {
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
     });
   }
 

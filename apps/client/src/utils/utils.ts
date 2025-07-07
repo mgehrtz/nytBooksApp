@@ -116,7 +116,27 @@ export function rateBook(bookId: string, score: number): Promise<boolean> {
       }
     ).then(async (resp) => {
       if(resp.ok){
-        console.warn('rating success.');
+        res(true);
+      }else{
+        console.warn(await resp.json());
+        rej(false);
+      }
+    });
+  });
+}
+
+export function deleteComment(commentId: number) {
+  return new Promise((res, rej) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API_URL}/comment/${commentId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    ).then(async (resp) => {
+      if(resp.ok){
         res(true);
       }else{
         console.warn(await resp.json());

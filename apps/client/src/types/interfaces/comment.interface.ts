@@ -7,4 +7,8 @@ export interface Comment {
   responseToId: number;
   responses: Comment[];
   bookId: string;
+  user: {
+    firstName: string;
+    lastName: string;
+  }
 }

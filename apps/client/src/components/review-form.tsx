@@ -1,7 +1,7 @@
 'use client'
 
 import { postComment } from "@/utils/utils";
-import { Button, Form, Input, Textarea } from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, Form, Input, Textarea } from "@heroui/react";
 import { Comment } from "@/types/interfaces/comment.interface";
 import React, { useRef } from "react";
 
@@ -31,28 +31,37 @@ export default function ReviewForm({ bookId, commentsList, onPostSuccess }: Prop
   }
 
   return (
-    <Form
-      className="min-w-fit w-full max-w-xs flex flex-col gap-4"
-      onSubmit={processComment}
-      id="commentForm"
-      ref={formRef}
-    >
-      <Textarea
-        isRequired
-        errorMessage="Comment field is empty."
-        label="Comment"
-        labelPlacement="outside"
-        name="comment"
-        placeholder="Comment..."
-        type="text"
-      />
-      <div className="flex gap-2">
-        <Button color="primary" type="submit">
-          Submit
-        </Button>
-      </div>
-      <Input type="hidden" name="bookId" value={ bookId } />
-    </Form>
+    <Card className="bg-slate-100 border-slate-200 border-1.5">
+      <CardHeader>
+        <h4 className="text-med font-bold">Add your voice to the conversation.</h4>
+      </CardHeader>
+      <CardBody>
+        <Form
+          className="grow flex flex-col gap-4"
+          onSubmit={processComment}
+          id="commentForm"
+          ref={formRef}
+        >
+          <Textarea
+            isRequired
+            errorMessage="Comment field is empty."
+            label="Comment"
+            labelPlacement="inside"
+            name="comment"
+            type="text"
+            variant="bordered"
+            className="grow"
+            minRows={5}
+          />
+          <div className="flex gap-2">
+            <Button color="primary" type="submit">
+              Submit
+            </Button>
+          </div>
+          <Input type="hidden" name="bookId" value={ bookId } />
+        </Form>
+      </CardBody>
+    </Card>
   );
 }
 

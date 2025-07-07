@@ -13,7 +13,19 @@ export class BookDataAccessService {
       },
       include: {
         ratings: true,
-        comments: true,
+        comments: {
+          include: {
+            user: {
+              select: {
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+          orderBy: {
+            publishedDate: 'asc',
+          },
+        },
       },
     });
   }
