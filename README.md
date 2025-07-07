@@ -15,7 +15,9 @@ cd nytBookApp
 
 Create .env files following the example .env in the `client`, and `api` directories.
 
-
+```shell
+npm run setup
+```
 
 ## Development Server
 
