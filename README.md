@@ -10,11 +10,12 @@ To get up and runing, run the following commands:
 
 ```shell
 git clone https://github.com/mgehrtz/nytBooksApp.git
-cd nytBestSellers
-npm install
+cd nytBookApp
 ```
 
-Create .env files following the example .env in the root, `client`, and `api` directories.
+Create .env files following the example .env in the `client`, and `api` directories.
+
+
 
 ## Development Server
 
