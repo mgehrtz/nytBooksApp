@@ -17,21 +17,21 @@ export function Nav() {
         <h2 className="font-bold text-2xl">NYT Best Sellers</h2>
       </Link>
       <div className="nav-links flex items-center gap-3">
-        <Button 
+        {/* <Button 
           className="font-medium" 
           href={'/'}
           as={Link}
         >
           Home
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           className="font-medium" 
           href={'/my-collection'}
           as={Link}
         >
           Saved Books
-        </Button>
-        <Button color="primary" onPress={handleClick}>Sign Out</Button>
+        </Button> */}
+        {/* <Button color="primary" onPress={handleClick}>Sign Out</Button> */}
       </div>
     </div>
   );
