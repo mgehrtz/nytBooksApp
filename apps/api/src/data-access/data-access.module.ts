@@ -9,8 +9,8 @@ import { RatingDataAccessService } from './rating-data-access.service';
 
 @Module({
   providers: [
-    UserDataAccessService,
     PrismaService,
+    UserDataAccessService,
     BookDataAccessService,
     CategoryDataAccessService,
     CategoryBookDataAccessService,
@@ -23,6 +23,7 @@ import { RatingDataAccessService } from './rating-data-access.service';
     CategoryDataAccessService,
     CategoryBookDataAccessService,
     CommentDataAccessService,
+    RatingDataAccessService,
   ],
 })
 export class DataAccessModule {}
