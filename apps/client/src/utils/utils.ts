@@ -2,6 +2,7 @@ import { BestSellerList } from "@/types/interfaces/best-seller-list.interface";
 import { Book } from "@/types/interfaces/book.interface";
 import { Category } from "@/types/interfaces/category.interface";
 import { Comment } from "@/types/interfaces/comment.interface";
+import { Rating } from "@/types/interfaces/rating.interface";
 
 export function logOut() {
   window.alert('log out.');
@@ -58,7 +59,20 @@ export function getBookByIsbn(isbn: string): Promise<Book> {
       if(resp.ok){
         res(await resp.json());
       }else{
-        console.warn(await resp.json());
+        rej(await resp.json());
+      }
+    })
+  })
+}
+
+export function getBookRatingByUser(bookId: string): Promise<Rating> {
+  return new Promise((res, rej) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API_URL}/rating/user/1/book/${bookId}` // todo get current user here
+    ).then(async (resp) => {
+      if(resp.ok){
+        res(await resp.json());
+      }else{
         rej(await resp.json());
       }
     })
@@ -78,6 +92,30 @@ export function postComment(comment: Comment): Promise<boolean> {
       }
     ).then(async (resp) => {
       if(resp.ok){
+        res(true);
+      }else{
+        console.warn(await resp.json());
+        rej(false);
+      }
+    });
+  });
+}
+
+export function rateBook(bookId: string, score: number): Promise<boolean> {
+  const data = { score: score }
+  return new Promise((res, rej) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API_URL}/rating/book/${bookId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    ).then(async (resp) => {
+      if(resp.ok){
+        console.warn('rating success.');
         res(true);
       }else{
         console.warn(await resp.json());

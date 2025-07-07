@@ -6,10 +6,12 @@ export class RatingDataAccessService {
   constructor(private readonly prisma: PrismaService) {}
 
   public async getRatingByUserAndBook(userId: number, bookId: string) {
-    return await this.prisma.rating.findFirst({
+    return await this.prisma.rating.findUnique({
       where: {
-        userId: userId,
-        bookId: bookId,
+        userId_bookId: {
+          userId: userId,
+          bookId: bookId,
+        },
       },
     });
   }

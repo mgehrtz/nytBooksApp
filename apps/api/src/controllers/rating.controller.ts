@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Param,
@@ -15,6 +16,17 @@ export class RatingController {
     private readonly ratingDal: RatingDataAccessService,
     private readonly ratingLogic: AverageRatingLogicService,
   ) {}
+
+  @Get('/user/:userId/book/:bookId')
+  public async getRatingByUserAndBook(
+    @Param('userId') userId: string,
+    @Param('bookId') bookId: string,
+  ) {
+    const parsedUserId = parseInt(userId);
+    return (
+      (await this.ratingDal.getRatingByUserAndBook(parsedUserId, bookId)) || {}
+    );
+  }
 
   @Post('/book/:bookId')
   public async rateBook(

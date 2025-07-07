@@ -1,15 +1,15 @@
 'use client'
 
+import { rateBook } from '@/utils/utils';
 import dynamic from 'next/dynamic'
 
-export default function StarRating({ currentUserRating }: { currentUserRating: number;}) {
+export default function StarRating({ currentUserRating, currentBookId }: { currentUserRating: number; currentBookId: string; }) {
  
   const ReactStars = dynamic(() => import('react-stars'), { ssr: false })
 
   // Catch Rating value
-  const ratingChanged = (rate: number) => {
-    window.alert(rate);
-    console.log(rate);
+  const ratingChanged = (score: number) => {
+    rateBook(currentBookId, score);
   }
 
   return (
@@ -17,6 +17,7 @@ export default function StarRating({ currentUserRating }: { currentUserRating: n
       <p className="text-med font-semibold mr-2">Your rating:</p>
       <ReactStars
         count={5}
+        half={false}
         onChange={ratingChanged}
         size={32}
         value={ currentUserRating || 0 }
