@@ -36,7 +36,7 @@ export class BookDataAccessService {
       where: {
         id: bookId,
       },
-      data:  {
+      data: {
         avgRating: avgScore,
       },
     });

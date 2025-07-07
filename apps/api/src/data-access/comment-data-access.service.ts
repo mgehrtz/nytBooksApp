@@ -21,7 +21,7 @@ export class CommentDataAccessService {
   public async update(comment: Comment) {
     return await this.prisma.comment.update({
       where: {
-        id: comment.id
+        id: comment.id,
       },
       data: {
         content: comment.content,
