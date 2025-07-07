@@ -26,14 +26,22 @@ export class CommentDataAccessService {
     });
   }
 
-  public async update(comment: Comment) {
+  public async update(commentId: number, newContent: string) {
     return await this.prisma.comment.update({
       where: {
-        id: comment.id,
+        id: commentId,
       },
       data: {
-        content: comment.content,
+        content: newContent,
         updatedDate: new Date(),
+      },
+      include: {
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
       },
     });
   }

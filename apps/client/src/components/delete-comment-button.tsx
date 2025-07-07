@@ -12,7 +12,7 @@ import {
   useDisclosure,
 } from "@heroui/react";
 
-export default function DeleteCommentButton({ commentId, onDelete }: { commentId: number, onDelete: (commentId: number) => void }) {
+export default function DeleteCommentButton({ commentId, onDelete, isDisabled }: { commentId: number, onDelete: (commentId: number) => void, isDisabled: boolean }) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   function handleDelete() {
@@ -21,7 +21,7 @@ export default function DeleteCommentButton({ commentId, onDelete }: { commentId
 
   return (
     <>
-      <Button isIconOnly color="danger" variant="faded" onPress={onOpen}>
+      <Button isIconOnly color="danger" variant="faded" isDisabled={isDisabled} onPress={onOpen}>
         <FontAwesomeIcon icon={faTrash} />
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

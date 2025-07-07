@@ -125,6 +125,29 @@ export function rateBook(bookId: string, score: number): Promise<boolean> {
   });
 }
 
+export function editComment(commentId: number, newContent: string): Promise<{ success: boolean, comment: Comment }> {
+  const data = { newContent: newContent };
+  return new Promise((res, rej) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API_URL}/comment/${commentId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    ).then(async (resp) => {
+      if(resp.ok){
+        res({ success: true, comment: await resp.json()});
+      }else{
+        console.warn(await resp.json());
+        rej({ success: false, comment: null });
+      }
+    });
+  })
+}
+
 export function deleteComment(commentId: number) {
   return new Promise((res, rej) => {
     fetch(
